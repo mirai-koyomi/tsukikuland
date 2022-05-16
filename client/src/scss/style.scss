@@ -1,0 +1,9 @@
+@import '_mixin/util';
+@import '_mixin/fontFace';
+
+@include include-mplus('2m');
+
+body {
+  font-family: mplus, sans-serif;
+  font-size: 14px;
+}
