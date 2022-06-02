@@ -23,7 +23,7 @@ module.exports = {
     // モジュールバンドルを行った結果を出力する場所やファイル名の指定
     // "__dirname"はこのファイルが存在するディレクトリを表すnode.jsで定義済みの定数
     path: `${__dirname}/public`,
-    publicPath: '/',
+    publicPath: '',
     filename: '[name].js', // [name]はentryで記述した名前(この例ではbundle）が入る
   },
   // モジュールとして扱いたいファイルの拡張子を指定する

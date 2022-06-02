@@ -3,7 +3,195 @@
 
 @include include-mplus('2m');
 
+@keyframes linkButton {
+  0% {
+    width: 0;
+    height: 1px;
+  }
+
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+
+  100% {
+    width: 100%;
+    height: 30px;
+  }
+}
+
 body {
-  font-family: mplus, sans-serif;
+  // font-family: mplus, sans-serif;
+  font-family: 'Shippori Mincho B1', serif;
   font-size: 14px;
+  color: #333;
+  background-position: center;
+  background-size: cover;
+}
+
+.top-page {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+  background: #efefef;
+  border: 16px solid #fff;
+
+  &__section {
+    position: relative;
+    height: 100%;
+    padding: 16px 0 0;
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 32px 0;
+
+  &-title {
+    padding-right: 48px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+    text-shadow: 1px 1px 1px #fff;
+    border-left: 8px solid #666;
+  }
+
+  &-description {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+
+    &__text {
+      display: inline-block;
+      padding: 4px 8px;
+      vertical-align: middle;
+      border: 1px solid #333;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0;
+    padding-right: 8px;
+    margin: 0;
+    list-style-type: none;
+    border-right: 4px solid #666;
+
+    &__item {
+      display: block;
+      font-size: 18px;
+      line-height: 1;
+      text-align: center;
+
+      &:not(:first-child) {
+        margin-left: 12px;
+      }
+    }
+
+    &__link {
+      position: relative;
+      display: block;
+      padding: 6px 10px;
+      color: #888;
+      text-decoration: none;
+      transition: 0.5s;
+
+      &::before,
+      &::after {
+        display: block;
+        width: 0;
+        height: 0;
+        content: '';
+      }
+
+      &::before {
+        @include centerize(0, 0, auto, auto);
+
+        border-top: 1px solid transparent;
+        border-left: 1px solid transparent;
+      }
+
+      &::after {
+        @include centerize(auto, auto, 0, 0);
+
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+      }
+
+      &:hover {
+        color: #333;
+
+        &::before,
+        &::after {
+          border-color: #333;
+          animation-name: linkButton;
+          animation-duration: 0.5s;
+          animation-timing-function: ease-in-out;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  &-info {
+    @include centerize(auto, 16px, 0, 16px);
+
+    z-index: 3;
+    display: flex;
+    align-items: center;
+
+    &__title {
+      min-width: 7em;
+      padding-bottom: 16px;
+      padding-left: 1.5em;
+      margin-top: -0.5em;
+      font-size: 68px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      text-indent: -1.5em;
+      text-shadow: 1px 1px 1px #fff;
+    }
+
+    &__description {
+      width: 100%;
+      padding: 8px 16px 8px 32px;
+      font-size: 16px;
+      line-height: 1.5;
+      border-left: 1px solid #666;
+    }
+  }
+
+  &-visual {
+    position: relative;
+    height: calc(100% - (68px * 1.5) - 16px);
+    overflow: hidden;
+
+    &::before {
+      @include centerize;
+
+      z-index: 2;
+      display: block;
+      content: '';
+      background-color: rgba(#fff, 0.15);
+    }
+
+    &__img {
+      @include centerize(auto);
+
+      z-index: 1;
+    }
+  }
 }
