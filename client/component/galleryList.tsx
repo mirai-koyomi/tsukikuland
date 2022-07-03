@@ -1,4 +1,5 @@
-import React, { FC, useMemo, useRef, useState, WheelEventHandler } from "react"
+import React, { CSSProperties, FC, useMemo, useRef, useState, WheelEventHandler } from "react"
+import {useTransition, animated, useSprings} from "react-spring"
 
 interface IGalleryListProps {
   list: {
@@ -64,16 +65,58 @@ const GalleryList: FC<IGalleryListProps> = ({list}) => {
     })
   }
 
-  const handleWheel: WheelEventHandler = (e): void => {
-    const now = new Date().getTime()
-    if (now - lastTime > interval) {
-      if (e.deltaY > 0) {
-        nextIdx()
-      } else {
-        backIdx()
+  const transitions = useTransition(currentIdx, {
+    from: (current, idx) => {
+      const deps = Math.abs(current - idx)
+      return {
+        opacity: deps > 3 ? 0 : 1 - .25 * deps,
+        transform: `scale(${deps > 3 ? 0 : 1 - .25 * deps}%)`,
+      }
+    },
+    leave: (current, idx) => {
+      const deps = Math.abs(current - idx)
+      return {
+        opacity: deps > 3 ? 0 : 1 - .25 * deps,
+        transform: `scale(${deps > 3 ? 0 : 1 - .25 * deps}%)`,
+      }
+    },
+    enter: {
+      opacity: 1,
+      transform: 'scale(100%)',
+    },
+  })
+
+  const [styles, api] = useSprings(
+    list.length,
+    idx => {
+      const deps = Math.abs(currentIdx - idx)
+      return {
+        opacity: deps > 3 ? 0 : 1 - .25 * deps,
+        transform: `scale(${deps > 3 ? 0 : 100 - 25 * deps}%)`,
       }
     }
-    lastTime = now
+  )
+
+  const handleWheel: WheelEventHandler = (e): void => {
+    const now = new Date().getTime()
+
+    if (now - lastTime > interval) {
+      if (e.deltaY > 0) {
+        setCurrentIdx(idx => (idx + 1) % rotateList.length)
+        api.start(idx => {
+          const deps = Math.abs(currentIdx + 1 - idx)
+          return {
+            opacity: deps > 3 ? 0 : 1 - .25 * deps,
+            transform: `scale(${deps > 3 ? 0 : 100 - 25 * deps}%)`,
+          }
+        })
+      } else {
+        setCurrentIdx(idx => (idx - 1) % rotateList.length)
+      }
+
+
+      lastTime = now
+    }
   }
 
   return (
@@ -81,7 +124,12 @@ const GalleryList: FC<IGalleryListProps> = ({list}) => {
       <div className="gallery__nav">
         <p>{currentIdx}</p>
         <ul className="gallery__list">
-          {listItem(rotateList)}
+          {styles.map((style, i) => {
+            const item = list[i]
+            return (
+              <animated.li style={style}>{item.title}</animated.li>
+            )
+          })}
         </ul>
       </div>
     </div>
