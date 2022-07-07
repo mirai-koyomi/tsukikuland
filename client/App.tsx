@@ -4,7 +4,7 @@ import MainFrame from './MainFrame'
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <MainFrame />
     </BrowserRouter>
   )
