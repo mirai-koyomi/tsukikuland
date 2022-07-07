@@ -1,8 +1,6 @@
 import { convertLineEndCode } from "./../Util"
 import React, { FC, useCallback, useEffect, useRef, useState, WheelEventHandler } from "react"
-import {animated, useSprings} from "react-spring"
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript"
-import useInterval from "use-interval"
+import {animated, useSprings, useTransition} from "react-spring"
 
 interface IGalleryListProps {
   list: {
@@ -22,7 +20,7 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
   const scrollArea = useRef<HTMLDivElement>(null)
   const [currentIdx, setCurrentIdx] = useState(8)
   const [lastTime, setLastTime]= useState(0)
-  const interval = 100
+  const interval = 250
 
   const copyList = [...list, ...list, ...list]
 
@@ -42,11 +40,11 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
     const deps = Math.abs(nextIdx - idx)
     const y = idx > nextIdx ? deps * (90 - (4 * deps)) : 0 - deps * (90 - (4 * deps))
     const x = 0 - deps * (14 + (6 * deps))
-    const lot = 1 / 6
+    const lot = 1 / 7
 
     return {
-      opacity: deps > 5 ? 0 : 1 - lot * deps,
-      scale: deps > 5 ? 0 : 1 - lot * deps,
+      opacity: idx === nextIdx ? 1 : .4,
+      scale: deps > 6 ? 0 : 1 - lot * deps,
       y,
       x,
       config: {duration},
@@ -66,29 +64,37 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
     })
   )
 
+  const transition = useTransition(currentIdx, {
+    from: {x: '60%', opacity: 0},
+    enter: {x: '0%', opacity: 1},
+    leave: {x: '60%', opacity: 0},
+    reverse: true,
+    config: { duration: 500 },
+  })
+
   const handleWheel: WheelEventHandler = (e): void => {
+    e.deltaY > 0 ? changeCurrentIdx(currentIdx + 1) : changeCurrentIdx(currentIdx - 1)
+  }
+
+  const changeCurrentIdx = (nextIdx: number) => {
     const now = new Date().getTime()
+    const listLength = list.length
 
     if (now - lastTime > interval) {
-      let nextIdx = currentIdx
-
-      if (e.deltaY > 0) {
-        if (currentIdx + 1 > list.length * 2) {
-          nextIdx = currentIdx - list.length
-          api.start(idx => scrollListTo(idx, 0, nextIdx, () => setCurrentIdx(nextIdx + 1)))
-        } else {
-          setCurrentIdx(nextIdx + 1)
-        }
+      if (listLength > nextIdx) {
+        api.start(idx => scrollListTo(idx, 0, currentIdx + listLength, () => {
+          setLastTime(now)
+          setCurrentIdx(nextIdx + listLength)
+        }))
+      } else if (nextIdx > listLength * 2) {
+        api.start(idx => scrollListTo(idx, 0, currentIdx - listLength, () => {
+          setLastTime(now)
+          setCurrentIdx(nextIdx - listLength)
+        }))
       } else {
-        if (list.length > currentIdx - 1) {
-          nextIdx = currentIdx + list.length
-          api.start(idx => scrollListTo(idx, 0, nextIdx, () => setCurrentIdx(nextIdx - 1)))
-        } else {
-          setCurrentIdx(nextIdx - 1)
-        }
+        setLastTime(now)
+        setCurrentIdx(nextIdx)
       }
-
-      setLastTime(now)
     }
   }
 
@@ -105,7 +111,7 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
           {styles.map((style, i) => {
             const item = copyList[i]
             return (
-              <animated.li className={'gallery__item'} style={style}>
+              <animated.li className={'gallery__item'} key={i} style={style} onClick={() => changeCurrentIdx(i)}>
                 <span className="gallely__name">
                   {convertLineEndCode(item.title)}
                 </span>
@@ -116,24 +122,31 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
       </div>
 
       <div className="gallery__content">
-        <div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id]})`}}>
-          <div className="gallery__info">
-            <div className="gallery__front-area">
-              <h1 className="gallery__title">
-                {convertLineEndCode(targetItem.title)}
-              </h1>
+        {
+          transition((styles, idx) => {
+            const targetItem = copyList[idx]
+            return (
+              <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id]})`, ...styles}}>
+                <div className="gallery__info">
+                  <div className="gallery__front-area">
+                    <h1 className="gallery__title">
+                      {convertLineEndCode(targetItem.title)}
+                    </h1>
 
-              <p className="gallery__synopsis">
-                {convertLineEndCode(targetItem.synopsis)}
-              </p>
+                    <p className="gallery__synopsis">
+                      {convertLineEndCode(targetItem.synopsis)}
+                    </p>
 
-              <p className="gallery__artist">
-                Write by {targetItem.artist}
-              </p>
-            </div>
+                    <p className="gallery__artist">
+                      Write by {targetItem.artist}
+                    </p>
+                  </div>
 
-          </div>
-        </div>
+                </div>
+              </animated.div>
+            )
+          })
+        }
       </div>
     </div>
   )
