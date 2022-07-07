@@ -45,8 +45,10 @@ body {
   }
 
   &__section {
+    position: absolute;
     height: 100%;
-    margin-bottom: 32px;
+
+    @include centerize;
   }
 }
 
