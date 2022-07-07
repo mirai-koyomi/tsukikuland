@@ -107,7 +107,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 100 * 1024, // 100KB以上だったら埋め込まずファイルとして分離する
+              limit: 1000 * 1024, // 100KB以上だったら埋め込まずファイルとして分離する
               name: `./public/img/[hash].[ext]`,
             },
           },

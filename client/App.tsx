@@ -2,56 +2,29 @@ import React, { FC, useLayoutEffect, useRef } from 'react'
 import mainVisual from './src/img/bg.jpg'
 import { BrowserRouter } from 'react-router-dom'
 import GalleryList from './component/galleryList'
+import data from './src/json/data.json'
+import img1 from './src/img/free-stock-photos-public-domain-images-013-1000x667.jpg'
+import img2 from './src/img/free-stock-photos-public-domain-images-002-1000x667.jpg'
+import img3 from './src/img/public-domain-images-free-stock-photos-apple-iphone-iphone-6.jpg'
+import img4 from './src/img/StockSnap_SEZMWXVOIS.jpg'
+import img5 from './src/img/StockSnap_R70UYUOOZG.jpg'
+import img6 from './src/img/StockSnap_LGBWHXHMEQ.jpg'
+import img7 from './src/img/StockSnap_AX04KXNOBI.jpg'
+import img8 from './src/img/public-domain-images-free-stock-photos-001-1080x720.jpg'
+
+const imgs = {
+  1: img1,
+  2: img2,
+  3: img3,
+  4: img4,
+  5: img5,
+  6: img6,
+  7: img7,
+  8: img8,
+}
 
 const App: FC = () => {
   const contentEl = useRef<HTMLDivElement>(null)
-  const galleryList: {
-    title: string
-    artist: string
-    synopsis: string
-    thumbnail?: string
-  }[] = [
-    {
-      title: '作品名0',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名1',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名2',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名3',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名4',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名5',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名6',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-    {
-      title: '作品名7',
-      artist: 'mirai_koyomi',
-      synopsis: 'ごにょごにょーん',
-    },
-  ]
   useLayoutEffect(() => {
     contentEl?.current?.scrollIntoView()
   })
@@ -99,7 +72,7 @@ const App: FC = () => {
         </section>
 
         <section ref={contentEl} className="top-page__section">
-          <GalleryList list={galleryList} />
+          <GalleryList list={data} imgs={imgs} />
         </section>
       </div>
 
