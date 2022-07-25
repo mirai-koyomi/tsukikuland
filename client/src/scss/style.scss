@@ -297,3 +297,34 @@ body {
     background-color: rgba(#fff, 0.75);
   }
 }
+
+.article {
+  padding: 50% 30px 30px;
+
+  &__header {
+    width: 16px * 32;
+    padding-bottom: 30px;
+    margin: 0 auto;
+  }
+
+  &__body {
+    width: 16px * 32;
+    margin: 0 auto;
+  }
+
+  &__line {
+    position: relative;
+    padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 2;
+    opacity: 0.4;
+    transition: 0.3s;
+    transform: scale(90%);
+
+    &.--active {
+      color: #333;
+      opacity: 1;
+      transform: scale(100%);
+    }
+  }
+}

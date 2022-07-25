@@ -14,12 +14,12 @@ interface IArticleProps {
 const Article: FC<IArticleProps> = ({item}) => {
   const {title, artist, synopsis, text} = item
   const [focusLine, setFocusLine] = useState(0)
-  const targetLine = useRef<HTMLParagraphElement>()
+  const targetLine = useRef<HTMLParagraphElement>(null)
 
   const eachLineWrap = (string: string): JSX.Element => {
     return (
       <>
-        {string.split('\n').map((line, idx) => <p ref={idx === focusLine ? targetLine : undefined}>{line}</p>)}
+        {string.split('\n').map((line, idx) => <p className={`article__line ${idx === focusLine ? '--active' : undefined}`} ref={idx === focusLine ? targetLine : undefined}>{line}</p>)}
       </>
     )
   }
@@ -29,7 +29,10 @@ const Article: FC<IArticleProps> = ({item}) => {
   }
 
   useEffect(() => {
-
+    targetLine.current?.scrollIntoView({
+      block: 'center',
+      behavior: 'smooth',
+    })
   }, [focusLine])
 
   return (
