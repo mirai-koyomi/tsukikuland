@@ -1,5 +1,5 @@
 {
-  "name": "story_dictionary_view",
+  "name": "tsukiku_land",
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,13 @@
     "start": "webpack-dev-server --mode=development",
     "start:client": "webpack-dev-server --config webpack.config.js",
     "clean": "rm -R node_modules/ && yarn",
-    "deploy": "gh-pages -d public"
+    "deploy": "webpack --mode=production && gh-pages -d public"
   },
   "browserslist": [
     "last 2 versions",
     "ie 9"
   ],
-  "homepage": "https://mirai-koyomi.github.io/tsukikuland",
+  "homepage": "/tsukikuland/",
   "repository": "git@github.com:mirai-koyomi/tsukikuland.git",
   "author": "mirai-koyomi <crossclose00@gmail.com>",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.3.0",
     "bootstrap": "^4.4.1",
+    "dotenv": "^16.0.1",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-google": "^0.14.0",

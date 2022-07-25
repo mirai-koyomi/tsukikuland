@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom'
+import { Link, Route, Switch, useLocation } from 'react-router-dom'
 import GalleryList from './component/galleryList'
 import data from './src/json/data.json'
 import img1 from './src/img/free-stock-photos-public-domain-images-013-1000x667.jpg'
@@ -12,7 +12,7 @@ import img6 from './src/img/StockSnap_LGBWHXHMEQ.jpg'
 import img7 from './src/img/StockSnap_AX04KXNOBI.jpg'
 import img8 from './src/img/public-domain-images-free-stock-photos-001-1080x720.jpg'
 import Top from './top'
-import { animated, useTransition } from 'react-spring'
+import { useTransition } from 'react-spring'
 
 const imgs = {
   1: img1,
@@ -34,6 +34,8 @@ const MainFrame: FC = () => {
     config: {duration: 250},
   })
 
+  const baseUrl = ''
+
   return (
     <div className="top-page">
       <header className="header">
@@ -49,13 +51,13 @@ const MainFrame: FC = () => {
 
         <ul className="header-menu">
           <li className="header-menu__item">
-            <Link to='/' className="header-menu__link">About</Link>
+            <Link to={`/`} className="header-menu__link">About</Link>
           </li>
           <li className="header-menu__item">
-            <Link to="/gallery" className="header-menu__link">Gallery</Link>
+            <Link to={`/gallery`} className="header-menu__link">Gallery</Link>
           </li>
           <li className="header-menu__item">
-            <Link to="/member" className="header-menu__link">Member</Link>
+            <Link to={`/member`} className="header-menu__link">Member</Link>
           </li>
         </ul>
       </header>
@@ -73,8 +75,6 @@ const MainFrame: FC = () => {
         </Switch>
 
       </div>
-
-
     </div>
   )
 }
