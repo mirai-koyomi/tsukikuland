@@ -1,10 +1,11 @@
 import { convertLineEndCode } from "./../Util"
 import React, { FC, useCallback, useEffect, useRef, useState, WheelEventHandler } from "react"
 import {animated, useSprings, useTransition} from "react-spring"
+import { Link } from "react-router-dom"
 
 interface IGalleryListProps {
   list: {
-    id: number
+    id: string
     title: string
     artist: string
     synopsis: string
@@ -12,7 +13,7 @@ interface IGalleryListProps {
     thumbnail?: string
   }[]
   imgs: {
-    [key in number]: string
+    [key in string]: string
   }
 }
 
@@ -129,17 +130,19 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
               <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id]})`, ...styles}}>
                 <div className="gallery__info">
                   <div className="gallery__front-area">
-                    <h1 className="gallery__title">
-                      {convertLineEndCode(targetItem.title)}
-                    </h1>
+                    <Link to={`gallery/${targetItem.id}`}>
+                      <h1 className="gallery__title">
+                        {convertLineEndCode(targetItem.title)}
+                      </h1>
 
-                    <p className="gallery__synopsis">
-                      {convertLineEndCode(targetItem.synopsis)}
-                    </p>
+                      <p className="gallery__synopsis">
+                        {convertLineEndCode(targetItem.synopsis)}
+                      </p>
 
-                    <p className="gallery__artist">
-                      Write by {targetItem.artist}
-                    </p>
+                      <p className="gallery__artist">
+                        Write by {targetItem.artist}
+                      </p>
+                    </Link>
                   </div>
 
                 </div>

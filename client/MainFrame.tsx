@@ -13,6 +13,8 @@ import img7 from './src/img/StockSnap_AX04KXNOBI.jpg'
 import img8 from './src/img/public-domain-images-free-stock-photos-001-1080x720.jpg'
 import Top from './top'
 import { useTransition } from 'react-spring'
+import { setCommentRange } from 'typescript'
+import Article from './component/Article'
 
 const imgs = {
   1: img1,
@@ -65,12 +67,29 @@ const MainFrame: FC = () => {
       <div className="top-page__content">
         <Switch>
           <Route exact path={'/'} component={Top} />
-          <Route path={'/gallery'} render={() => {
+          <Route exact path={'/gallery'} render={() => {
             return (
               <section className="top-page__section">
                 <GalleryList list={data} imgs={imgs} />
               </section>
             )
+          }} />
+          <Route path={'/gallery/:id'} render={(props) => {
+            const article = data.find(item => item.id === props.match.params.id)
+
+            if (article) {
+              return (
+                <section className="top-page__section">
+                  <Article item={article} />
+                </section>
+              )
+            } else {
+              return (
+                <section className="top-page__section">
+                  <p>存在しないページです。</p>
+                </section>
+              )
+            }
           }} />
         </Switch>
 
