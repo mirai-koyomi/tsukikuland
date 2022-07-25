@@ -4,6 +4,10 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+const env = dotenv.config().parsed;
 
 module.exports = {
   mode: 'development',
@@ -125,6 +129,9 @@ module.exports = {
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
     }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(env)
+    }),
     new StyleLintPlugin({
       configFile: './.stylelintrc',
       syntax: 'scss',
@@ -133,6 +140,6 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./client/src/html/index.html"
-    })
+    }),
   ],
 };
