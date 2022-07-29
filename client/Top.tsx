@@ -3,7 +3,7 @@ import mainVisual from './src/img/bg.jpg'
 
 const Top: FC = () => {
   return (
-    <section className="top-page__section">
+    <>
       <div className="main-info">
         <h2 className='main-info__title'>
           いつか稲穂の<br />
@@ -17,7 +17,7 @@ const Top: FC = () => {
       <figure className='main-visual'>
         <img src={mainVisual} className="main-visual__img" />
       </figure>
-    </section>
+    </>
   )
 }
 
