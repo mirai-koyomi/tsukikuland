@@ -1,9 +1,13 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-const Header: FC = () => {
+interface IHeaderProps {
+  isShow?: boolean
+}
+
+const Header: FC<IHeaderProps> = ({isShow = true}) => {
   return (
-    <header className="header">
+    <header className={`header${isShow ? '' : ' --hide'}`}>
       <h1 className="header-title">
         TsukikuLand
       </h1>

@@ -15,6 +15,7 @@ import Top from './top'
 import { useTransition } from 'react-spring'
 import Article from './component/Article'
 import BasicSection from './section/BasicSection'
+import ArtSection from './section/ArtSection'
 
 const imgs = {
   1: img1,
@@ -44,6 +45,11 @@ const MainFrame: FC = () => {
         <Route index element={<Top />} />
         <Route path={'/gallery'}>
           <Route index element={<GalleryList list={data} imgs={imgs} />} />
+        </Route>
+      </Route>
+
+      <Route element={<ArtSection />} >
+        <Route path={'/gallery'}>
           <Route path=":article_id" element={<Article list={data} />} />
         </Route>
       </Route>

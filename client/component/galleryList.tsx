@@ -130,7 +130,7 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
               <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id]})`, ...styles}}>
                 <div className="gallery__info">
                   <div className="gallery__front-area">
-                    <Link to={`${targetItem.id}`}>
+                    <Link to={`${targetItem.id}`} className={'gallery__link'}>
                       <h1 className="gallery__title">
                         {convertLineEndCode(targetItem.title)}
                       </h1>

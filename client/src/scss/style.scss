@@ -54,6 +54,30 @@ body {
   }
 }
 
+.art-page {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+
+  &__content {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__section {
+    @include centerize($top: 0);
+  }
+
+  &__fullview-section {
+    @include centerize();
+  }
+}
+
 .header {
   position: fixed;
   display: flex;
@@ -64,6 +88,10 @@ body {
   z-index: 100;
   background-color: #e9e9e9;
   border-bottom: 1px solid #ddd;
+
+  &.--hide {
+    display: none;
+  }
 
   &-title {
     padding-right: 48px;
@@ -302,31 +330,44 @@ body {
     text-align: right;
     background-color: rgba(#fff, 0.75);
   }
+
+  &__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .article {
-  padding: 30px 30px;
+  @include centerize;
   height: 100%;
+  padding: 0;
+  transition: .5s;
+
+  &.--show-footer {
+    top: -100vh;
+    bottom: auto;
+  }
 
   &__header {
-    width: 16px * 32;
+    width: 18px * 28;
     padding-bottom: 30px;
     margin: 0 auto;
   }
 
   &__body {
-    width: 16px * 32;
+    width: 18px * 28;
     margin: 0 auto;
   }
 
   &__line {
     position: relative;
     padding: 6px 0;
-    min-height: (6px + 16px) * 2;
-    font-size: 16px;
+    min-height: (6px + 18px) * 2;
+    font-size: 18px;
     line-height: 2;
     opacity: 0.3;
-    transition: 0.1s;
+    transition: 0.3s;
     transform: scale(90%);
 
     &.--active {
@@ -335,12 +376,27 @@ body {
       transform: scale(100%);
     }
   }
+
+  &__footer {
+    padding-top: 65px;
+    height: 100%;
+    background: #e2e2e2;
+  }
+
+  &__writer-info {
+    height: 50%;
+  }
+
+  &__other-work {
+    height: 50%;
+  }
 }
 
 
 .scroll-area {
   height: 100%;
   position: relative;
+  overflow: hidden;
 
   &__wrap {
     overflow: hidden;
@@ -351,18 +407,18 @@ body {
   }
 
   &__bar {
-    @include centerize($left: auto);
+    @include centerize($left: auto, $top: 100px, $bottom: 100px);
 
     width: 8px;
-    background-color: #ccc;
-    height: 100%;
+    background-color: #ddd;
     border-radius: 3px;
+    height: auto;
     overflow: hidden;
   }
 
   &__grip {
     width: 100%;
-    background-color: #333;
+    background-color: #888;
     border-radius: 3px;
     min-height: 8px;
   }
