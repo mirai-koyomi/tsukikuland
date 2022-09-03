@@ -4,20 +4,14 @@ import {animated, useSprings, useTransition} from "react-spring"
 import { Link } from "react-router-dom"
 
 interface IGalleryListProps {
-  list: {
-    id: string
-    title: string
-    artist: string
-    synopsis: string
-    text: string
-    thumbnail?: string
-  }[]
+  list: IJsonData[]
+  creatorList: IJsonCreator[]
   imgs: {
     [key in string]: string
   }
 }
 
-const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
+const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
   const scrollArea = useRef<HTMLDivElement>(null)
   const [currentIdx, setCurrentIdx] = useState(8)
   const [lastTime, setLastTime]= useState(0)
@@ -140,7 +134,11 @@ const GalleryList: FC<IGalleryListProps> = ({list, imgs}) => {
                       </p>
 
                       <p className="gallery__artist">
-                        Write by {targetItem.artist}
+                        {
+                          `Author by ${creatorList.find(creator => {
+                            return creator.id === targetItem.creator_id
+                          })?.name}`
+                        }
                       </p>
                     </Link>
                   </div>

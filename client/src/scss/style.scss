@@ -20,6 +20,24 @@
   }
 }
 
+%footer-box {
+  width: 60%;
+}
+
+%header3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+%link {
+  color: #888;
+  transition: 0.5s;
+  &:hover {
+    color: #333;
+  }
+}
+
 body {
   // font-family: mplus, sans-serif;
   font-family: 'Shippori Mincho B1', serif;
@@ -383,15 +401,112 @@ body {
     background: #e2e2e2;
   }
 
-  &__writer-info {
+  &__writer-info,
+  &__other-works {
     height: 50%;
-  }
-
-  &__other-work {
-    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
+.writer-info {
+  @extend %footer-box;
+
+  &__title {
+    @extend %header3;
+  }
+
+  &__contents {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-left: 32px;
+  }
+
+  &__text {
+    margin-left: 24px;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  &__bio {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  &__sns {
+    display: flex;
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      font-size: 14px;
+      display: inline-block;
+
+      &:not(:first-child) {
+        margin-left: 8px;
+        &:before {
+          display: inline-block;
+          content: '/';
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  &__link {
+    @extend %link;
+  }
+}
+
+.other-works {
+  @extend %footer-box;
+
+  &__title {
+    @extend %header3;
+  }
+
+  &__list {
+    margin: 0 32px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__item {
+    margin-bottom: 8px;
+  }
+
+  &__work-title {
+    font-size: 16px;
+    font-weight: 200;
+    margin-bottom: 4px;
+  }
+
+  &__writer {
+    font-size: 14px;
+    margin-left: 24px;
+  }
+
+  &__link {
+    @extend %link;
+  }
+}
+
+.icon {
+  @include square(100px);
+  border-radius: 50%;
+  overflow: hidden;
+}
 
 .scroll-area {
   height: 100%;
