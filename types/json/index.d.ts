@@ -1,13 +1,41 @@
-declare module '*/data.json' {
-  interface IJsonData {
-    id: number
-    title: string
-    artist: string,
-    synopsis: string,
-    text: string
-    thumbnail?: string
-  }[]
+interface IJsonDataTemp {
+  id: number
+  type: 'novel' | 'comic'
+  creator_id: number
+  title: string
+  synopsis: string
+  thumbnail?: string
+}
 
-  const value: IJsonData;
+interface IJsonDataNovel extends IJsonDataTemp {
+  type: 'novel'
+  text: string
+}
+
+interface IJsonDataComic extends IJsonDataTemp {
+  type: 'comic'
+  pages: string[]
+}
+
+type IJsonData = IJsonDataNovel | IJsonDataComic
+
+interface IJsonCreator {
+  id: number
+  name: string
+  icon: string
+  twitter?: string
+  pixiv?: string
+  bio: string
+}
+
+declare module '*/data.json' {
+
+  const value: IJsonData[];
+  export = value;
+}
+
+declare module '*/creator.json' {
+
+  const value: IJsonCreator[];
   export = value;
 }

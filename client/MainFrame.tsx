@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 
-import { Link, Route, Switch, useLocation } from 'react-router-dom'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import GalleryList from './component/galleryList'
 import data from './src/json/data.json'
+import creatorList from './src/json/Creator.json'
 import img1 from './src/img/free-stock-photos-public-domain-images-013-1000x667.jpg'
 import img2 from './src/img/free-stock-photos-public-domain-images-002-1000x667.jpg'
 import img3 from './src/img/public-domain-images-free-stock-photos-apple-iphone-iphone-6.jpg'
@@ -11,8 +12,12 @@ import img5 from './src/img/StockSnap_R70UYUOOZG.jpg'
 import img6 from './src/img/StockSnap_LGBWHXHMEQ.jpg'
 import img7 from './src/img/StockSnap_AX04KXNOBI.jpg'
 import img8 from './src/img/public-domain-images-free-stock-photos-001-1080x720.jpg'
+import icon from './src/img/icon/c02UkKn1_400x400.jpg'
 import Top from './top'
 import { useTransition } from 'react-spring'
+import Article from './component/Article'
+import BasicSection from './section/BasicSection'
+import ArtSection from './section/ArtSection'
 
 const imgs = {
   1: img1,
@@ -24,6 +29,17 @@ const imgs = {
   7: img7,
   8: img8,
 }
+
+const icons = {
+  1: icon,
+  2: icon,
+  3: icon,
+  4: icon,
+  5: icon,
+  6: icon,
+}
+
+data[0].type
 
 const MainFrame: FC = () => {
   const location = useLocation()
@@ -37,45 +53,20 @@ const MainFrame: FC = () => {
   const baseUrl = ''
 
   return (
-    <div className="top-page">
-      <header className="header">
-        <h1 className="header-title">
-          TsukikuLand
-        </h1>
+    <Routes>
+      <Route element={<BasicSection />} >
+        <Route index element={<Top />} />
+        <Route path={'/gallery'}>
+          <Route index element={<GalleryList list={data as IJsonData[]} creatorList={creatorList} imgs={imgs} />} />
+        </Route>
+      </Route>
 
-        <div className="header-description">
-          <span className="header-description__text">
-            月蔵Web合同特設ページ
-          </span>
-        </div>
-
-        <ul className="header-menu">
-          <li className="header-menu__item">
-            <Link to={`/`} className="header-menu__link">About</Link>
-          </li>
-          <li className="header-menu__item">
-            <Link to={`/gallery`} className="header-menu__link">Gallery</Link>
-          </li>
-          <li className="header-menu__item">
-            <Link to={`/member`} className="header-menu__link">Member</Link>
-          </li>
-        </ul>
-      </header>
-
-      <div className="top-page__content">
-        <Switch>
-          <Route exact path={'/'} component={Top} />
-          <Route path={'/gallery'} render={() => {
-            return (
-              <section className="top-page__section">
-                <GalleryList list={data} imgs={imgs} />
-              </section>
-            )
-          }} />
-        </Switch>
-
-      </div>
-    </div>
+      <Route element={<ArtSection />} >
+        <Route path={'/gallery'}>
+          <Route path=":article_id" element={<Article creatorList={creatorList} list={data as IJsonData[]} icons={icons} />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 

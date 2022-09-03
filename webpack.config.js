@@ -1,9 +1,6 @@
 const Webpack = require('webpack');
 const Autoprefixer = require('autoprefixer');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
-const NodemonPlugin = require('nodemon-webpack-plugin');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
 
@@ -13,7 +10,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     // webpack-dev-serverの公開フォルダ
-    contentBase: `${__dirname}/public`,
+    // contentBase: `${__dirname}/public`,
     historyApiFallback: true
   },
   // モジュールバンドルを行う起点となるファイルの指定
@@ -27,7 +24,7 @@ module.exports = {
     // モジュールバンドルを行った結果を出力する場所やファイル名の指定
     // "__dirname"はこのファイルが存在するディレクトリを表すnode.jsで定義済みの定数
     path: `${__dirname}/public`,
-    publicPath: '',
+    publicPath: '/',
     filename: '[name].js', // [name]はentryで記述した名前(この例ではbundle）が入る
   },
   // モジュールとして扱いたいファイルの拡張子を指定する
@@ -39,16 +36,6 @@ module.exports = {
   // モジュールに適用するルールの設定（ここではローダーの設定を行う事が多い）
   module: {
     rules: [
-
-      {
-        enforce: 'pre',
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          fix: true,
-        },
-      },
       {
         // 拡張子が.tsで終わるファイルに対して、TypeScriptコンパイラを適用する
         test: /\.tsx?$/,
@@ -90,11 +77,13 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              plugins: [
-                new Autoprefixer({
-                  grid: true,
-                }),
-              ],
+              postcssOptions: {
+                plugins: [
+                  new Autoprefixer({
+                    grid: true,
+                  }),
+                ],
+              },
             },
           },
           {
@@ -131,12 +120,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(env)
-    }),
-    new StyleLintPlugin({
-      configFile: './.stylelintrc',
-      syntax: 'scss',
-      quiet: false,
-      fix: true,
     }),
     new HtmlWebpackPlugin({
       template: "./client/src/html/index.html"
