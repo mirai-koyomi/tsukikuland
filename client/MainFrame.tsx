@@ -37,26 +37,32 @@ const icons = {
 const imgs: {
   [key in string]: {
     thumb: string,
-    pages?: string[]
+    pages: string[]
   }
 } = {
   1: {
-    thumb: img1
+    thumb: img1,
+    pages: []
   },
   2: {
-    thumb: img2
+    thumb: img2,
+    pages: []
   },
   3: {
-    thumb: img3
+    thumb: img3,
+    pages: []
   },
   4: {
-    thumb: img4
+    thumb: img4,
+    pages: []
   },
   5: {
-    thumb: img5
+    thumb: img5,
+    pages: []
   },
   6: {
-    thumb: img6
+    thumb: img6,
+    pages: []
   },
   7: {
     thumb: img7,
@@ -64,6 +70,7 @@ const imgs: {
   },
   8: {
     thumb: img8,
+    pages: []
   },
 }
 

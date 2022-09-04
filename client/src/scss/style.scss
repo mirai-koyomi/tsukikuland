@@ -89,6 +89,7 @@ body {
 
   &__section {
     @include centerize($top: 0);
+    height: 100%;
   }
 
   &__fullview-section {
@@ -407,6 +408,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+.comic {
+  @include centerize;
+  height: 100%;
+  transition: .5s;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  padding-top: 65px;
+
+  &.--hide {
+    padding-top: 0;
+  }
+
+  .fullscreen {
+    width: 100%;
   }
 }
 

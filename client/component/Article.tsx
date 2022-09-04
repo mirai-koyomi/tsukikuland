@@ -1,5 +1,6 @@
 import React, { FC, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import Comic from './comic'
 import Novel from './Novel'
 
 interface IArticleProps {
@@ -8,24 +9,26 @@ interface IArticleProps {
   imgs: {
     [key in string]: {
       thumb: string,
-      pages?: string[]
+      pages: string[]
     }
   }
   icons: {[key in string]: string}
 }
 
-const Article: FC<IArticleProps> = ({list, creatorList, icons}) => {
+const Article: FC<IArticleProps> = ({list, creatorList, icons, imgs}) => {
   const {article_id} = useParams<{article_id: string}>()
   const item = useMemo(() => list.find(item => '' + item.id === article_id), [article_id])
 
   if (item && article_id) {
     if (item.type === 'novel') {
       return <Novel list={list} creatorList={creatorList} icons={icons} item={item} />
-    } else {
+    } else if (item.type === 'comic') {
 
+      return <Comic list={list} creatorList={creatorList} icons={icons} item={item} pages={imgs[item.id].pages} />
+    } else {
       return (
         <div>
-          漫画記事です
+          存在しない記事です。
         </div>
       )
     }
