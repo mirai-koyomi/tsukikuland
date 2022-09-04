@@ -7,7 +7,10 @@ interface IGalleryListProps {
   list: IJsonData[]
   creatorList: IJsonCreator[]
   imgs: {
-    [key in string]: string
+    [key in string]: {
+      thumb: string,
+      pages?: string[]
+    }
   }
 }
 
@@ -93,8 +96,6 @@ const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
     }
   }
 
-  const targetItem = copyList[currentIdx]
-
   useEffect(() => {
     api.start(idx => scrollListTo(idx))
   }, [currentIdx])
@@ -121,7 +122,7 @@ const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
           transition((styles, idx) => {
             const targetItem = copyList[idx]
             return (
-              <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id]})`, ...styles}}>
+              <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id].thumb})`, ...styles}}>
                 <div className="gallery__info">
                   <div className="gallery__front-area">
                     <Link to={`${targetItem.id}`} className={'gallery__link'}>

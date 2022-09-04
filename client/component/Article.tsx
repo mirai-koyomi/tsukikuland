@@ -5,6 +5,12 @@ import Novel from './Novel'
 interface IArticleProps {
   list: IJsonData[],
   creatorList: IJsonCreator[]
+  imgs: {
+    [key in string]: {
+      thumb: string,
+      pages?: string[]
+    }
+  }
   icons: {[key in string]: string}
 }
 
@@ -19,7 +25,7 @@ const Article: FC<IArticleProps> = ({list, creatorList, icons}) => {
 
       return (
         <div>
-          存在しない記事です。
+          漫画記事です
         </div>
       )
     }
