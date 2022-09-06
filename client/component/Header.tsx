@@ -20,6 +20,9 @@ const Header: FC<IHeaderProps> = ({isShow = true}) => {
 
       <ul className="header-menu">
         <li className="header-menu__item">
+          <Link to={`/`} className="header-menu__link">About</Link>
+        </li>
+        <li className="header-menu__item">
           <Link to={`/gallery`} className="header-menu__link">Gallery</Link>
         </li>
       </ul>

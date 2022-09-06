@@ -9,15 +9,24 @@ import img2 from './src/img/free-stock-photos-public-domain-images-002-1000x667.
 import img3 from './src/img/public-domain-images-free-stock-photos-apple-iphone-iphone-6.jpg'
 import img4 from './src/img/StockSnap_SEZMWXVOIS.jpg'
 import img5 from './src/img/StockSnap_R70UYUOOZG.jpg'
-import img6 from './src/img/StockSnap_LGBWHXHMEQ.jpg'
+import img6 from './src/img/6/thumb.png'
 import img7 from './src/img/7/thumb.png'
 import img8 from './src/img/public-domain-images-free-stock-photos-001-1080x720.jpg'
-import work7img1 from './src/img/7/01.png';
-import work7img2 from './src/img/7/02.png';
-import work7img3 from './src/img/7/03.png';
-import work7img4 from './src/img/7/04.png';
+import work6img1 from './src/img/6/01.png'
+import work6img2 from './src/img/6/02.png'
+import work6img3 from './src/img/6/03.png'
+import work6img4 from './src/img/6/04.png'
+import work6img5 from './src/img/6/05.png'
+import work6img6 from './src/img/6/06.png'
+import work6img7 from './src/img/6/07.png'
+import work6img8 from './src/img/6/08.png'
+import work7img1 from './src/img/7/01.png'
+import work7img2 from './src/img/7/02.png'
+import work7img3 from './src/img/7/03.png'
+import work7img4 from './src/img/7/04.png'
 import icon from './src/img/icon/c02UkKn1_400x400.jpg'
-import icon7 from './src/img/icon/FjSc4TI2_400x400.jpg'
+import icon6 from './src/img/icon/06.jpg'
+import icon7 from './src/img/icon/07.jpg'
 import Top from './top'
 import { useTransition } from 'react-spring'
 import Article from './component/Article'
@@ -30,7 +39,7 @@ const icons = {
   3: icon,
   4: icon,
   5: icon,
-  6: icon,
+  6: icon6,
   7: icon7,
 }
 
@@ -62,7 +71,7 @@ const imgs: {
   },
   6: {
     thumb: img6,
-    pages: []
+    pages: [work6img1, work6img2, work6img3, work6img4, work6img5, work6img6, work6img7, work6img8]
   },
   7: {
     thumb: img7,
@@ -82,8 +91,6 @@ const MainFrame: FC = () => {
     leave: {opcity: 0, y: '60%'},
     config: {duration: 250},
   })
-
-  const baseUrl = ''
 
   return (
     <Routes>

@@ -5,18 +5,23 @@ import ArtContext from '../ArtContext'
 
 const ArtSection: FC = () => {
   const [show, setShow] = useState(true)
+  const [relative, setRelative] = useState(true)
 
   const viewSwitch = useCallback((bool: boolean) => {
     setShow(bool)
   }, [setShow])
 
+  const relativeSwitch = useCallback((bool: boolean) => {
+    setRelative(bool)
+  }, [setRelative])
+
   return (
-    <div className="art-page">
+    <div className={`art-page${relative ? '' : ' --fixed'}`}>
       <Header isShow={show} />
 
       <div className="art-page__content">
         <section className="art-page__section">
-          <ArtContext.Provider value={{headerViewSwitch: viewSwitch}}>
+          <ArtContext.Provider value={{headerViewSwitch: viewSwitch, handleRelativeSwitch: relativeSwitch}}>
             <Outlet />
           </ArtContext.Provider>
         </section>

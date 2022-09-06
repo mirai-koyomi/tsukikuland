@@ -1,6 +1,8 @@
 import ArtContext from '../ArtContext'
 import React, { FC, useContext, useEffect, useState } from 'react'
 import ComicViewer from 'react-comic-viewer'
+import WriterInfo from './WriterInfo'
+import OtherWorks from './OtherWorks'
 
 interface IComicProps {
   list: IJsonData[]
@@ -13,6 +15,7 @@ interface IComicProps {
 const Comic: FC<IComicProps> = ({list, item, pages, icons, creatorList}) => {
   const {headerViewSwitch} = useContext(ArtContext)
   const [isShowHeader, setIsShowHeader] = useState(true)
+  const artist = creatorList.find(creator => creator.id === item.creator_id)
 
   useEffect(() => {
     headerViewSwitch(isShowHeader)
@@ -32,6 +35,22 @@ const Comic: FC<IComicProps> = ({list, item, pages, icons, creatorList}) => {
           normal: '通常表示'
         }}
       />
+
+      <div className="article__footer">
+        {
+          artist ? (
+            <>
+              <div className="article__writer-info">
+                <WriterInfo artist={artist} icons={icons} />
+              </div>
+
+              <div className="article__other-works">
+                <OtherWorks currentArticleId={'' + item.id} list={list} creatorList={creatorList} />
+              </div>
+            </>
+          ) : null
+        }
+      </div>
     </div>
   )
 }
