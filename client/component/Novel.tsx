@@ -45,11 +45,6 @@ const Novel: FC<INovelProps> = ({list, creatorList, item, icons}) => {
     return () => document.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
-  useEffect(() => {
-    setPos(0)
-    window.scrollTo({top: 0})
-  }, [item])
-
   return (
     <div className={`novel`}>
       <div className="novel__wrap">

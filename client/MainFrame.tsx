@@ -32,6 +32,8 @@ import { useTransition } from 'react-spring'
 import Article from './component/Article'
 import BasicSection from './section/BasicSection'
 import ArtSection from './section/ArtSection'
+import OtherSection from './section/OtherSection'
+import Member from './component/Member'
 
 const icons = {
   1: icon,
@@ -104,6 +106,12 @@ const MainFrame: FC = () => {
       <Route element={<ArtSection />} >
         <Route path={'/gallery'}>
           <Route path=":article_id" element={<Article creatorList={creatorList} list={data as IJsonData[]} imgs={imgs} icons={icons} />} />
+        </Route>
+      </Route>
+
+      <Route element={<OtherSection />} >
+        <Route path={'/member'}>
+          <Route index element={<Member members={creatorList} icons={icons} />} />
         </Route>
       </Route>
     </Routes>

@@ -14,12 +14,6 @@ const Header: FC<IHeaderProps> = ({isShow = true}) => {
         </Link>
       </h1>
 
-      <div className="header-description">
-        <span className="header-description__text">
-          月蔵Web合同特設ページ
-        </span>
-      </div>
-
       <ul className="header-menu">
         <li className="header-menu__item">
           <Link to={`/`} className="header-menu__link">About</Link>
@@ -27,7 +21,16 @@ const Header: FC<IHeaderProps> = ({isShow = true}) => {
         <li className="header-menu__item">
           <Link to={`/gallery`} className="header-menu__link">Gallery</Link>
         </li>
+        <li className="header-menu__item">
+          <Link to={`/member`} className="header-menu__link">Member</Link>
+        </li>
       </ul>
+
+      <div className="header-description">
+        <span className="header-description__text">
+          月蔵Web合同特設ページ
+        </span>
+      </div>
     </header>
   )
 }

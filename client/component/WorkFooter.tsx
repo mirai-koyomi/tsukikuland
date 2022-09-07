@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC } from 'react'
 import OtherWorks from './OtherWorks'
 import WriterInfo from './WriterInfo'
 
@@ -8,7 +8,7 @@ interface IWorkFooterProps {
   icons: {[key in string]: string}
   list: IJsonData[]
   creatorList: IJsonCreator[]
-  _ref: React.RefObject<HTMLDivElement>
+  _ref?: React.RefObject<HTMLDivElement>
 }
 
 const WorkFooter: FC<IWorkFooterProps> = ({currentArticleId, artist, icons, list, creatorList, _ref}) => {
