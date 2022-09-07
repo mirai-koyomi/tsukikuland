@@ -12,7 +12,7 @@ interface IWorksProps {
 
 const Works: FC<IWorksProps> = ({work, creator, imgs}) => {
   return (
-    <div className={`works`} style={{backgroundImage: `url(${imgs[creator.id].thumb})`}}>
+    <div className={`works`} style={{backgroundImage: `url(${imgs[work.id].thumb})`}}>
       <div className="works__wrap">
         <div className="works__layer">
           <h1 className="works__title">

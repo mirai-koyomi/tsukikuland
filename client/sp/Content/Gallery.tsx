@@ -73,6 +73,7 @@ const Gallery: FC<IGalleryProps> = ({works, creators, imgs}) => {
   })
 
   const handleTouchMove: TouchEventHandler = (e): void => {
+    e.preventDefault()
     e.touches[0].pageY < touchPos ? changeCurrentIdx(currentIdx + 1) : changeCurrentIdx(currentIdx - 1)
   }
 
