@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const BasicSection: FC = () => {
   return (
-    <div className="top-page">
+    <div className="top-page pc-page">
       <Header />
 
       <div className="top-page__content">

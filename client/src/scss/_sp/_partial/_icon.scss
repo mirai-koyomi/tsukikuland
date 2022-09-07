@@ -1,0 +1,8 @@
+.sp-wrap {
+  .icon {
+    @include square(140px);
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+  }
+}

@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import MainFrame from './MainFrame'
 import { CookiesProvider } from 'react-cookie'
 
-const baseUrl = '/'
+const baseUrl = '/tsukikuland'
 
 const App: FC = () => {
   return (

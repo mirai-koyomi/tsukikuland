@@ -1,0 +1,16 @@
+.sp-wrap {
+  .section {
+    min-height: calc(100vh - 53px);
+
+    &__title {
+      font-size: 24px;
+      font-weight: 200;
+    }
+
+    &__text {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 2;
+    }
+  }
+}

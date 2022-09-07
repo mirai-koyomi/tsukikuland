@@ -1,0 +1,53 @@
+.sp-wrap {
+  .writer-info {
+    &__title {
+      text-align: center;
+    }
+    &__contents {
+      padding-top: 24px;
+    }
+    &__icon {
+      text-align: center;
+    }
+
+    &__name {
+      padding-top: 24px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    &__bio {
+      padding-top: 16px;
+    }
+
+    &__sns {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      &-item {
+        font-size: 14px;
+        display: inline-block;
+
+        &:not(:first-child) {
+          margin-left: 8px;
+          &:before {
+            display: inline-block;
+            content: '/';
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+
+    &__link {
+      color: #666;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}

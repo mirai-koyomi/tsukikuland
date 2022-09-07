@@ -1,0 +1,13 @@
+.sp-wrap {
+  .novel {
+    &__wrap {
+      padding: calc(50vh - 8px - 53px) 8px;
+      margin: 0 auto;
+      max-width: 344px;
+    }
+
+    &__text {
+      padding-top: 16px;
+    }
+  }
+}

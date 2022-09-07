@@ -34,6 +34,8 @@ import BasicSection from './section/BasicSection'
 import ArtSection from './section/ArtSection'
 import OtherSection from './section/OtherSection'
 import Member from './component/Member'
+import { useMedia } from 'react-use'
+import SPMainFrame from './sp/MainFrame'
 
 const icons = {
   1: icon,
@@ -93,28 +95,33 @@ const MainFrame: FC = () => {
     leave: {opcity: 0, y: '60%'},
     config: {duration: 250},
   })
+  const isPC = useMedia('(min-width: 960px)')
 
   return (
-    <Routes>
-      <Route element={<BasicSection />} >
-        <Route index element={<Top />} />
-        <Route path={'/gallery'}>
-          <Route index element={<GalleryList list={data as IJsonData[]} creatorList={creatorList} imgs={imgs} />} />
+    isPC ? (
+      <Routes>
+        <Route element={<BasicSection />} >
+          <Route index element={<Top />} />
+          <Route path={'/gallery'}>
+            <Route index element={<GalleryList list={data as IJsonData[]} creatorList={creatorList} imgs={imgs} />} />
+          </Route>
         </Route>
-      </Route>
 
-      <Route element={<ArtSection />} >
-        <Route path={'/gallery'}>
-          <Route path=":article_id" element={<Article creatorList={creatorList} list={data as IJsonData[]} imgs={imgs} icons={icons} />} />
+        <Route element={<ArtSection />} >
+          <Route path={'/gallery'}>
+            <Route path=":article_id" element={<Article creatorList={creatorList} list={data as IJsonData[]} imgs={imgs} icons={icons} />} />
+          </Route>
         </Route>
-      </Route>
 
-      <Route element={<OtherSection />} >
-        <Route path={'/member'}>
-          <Route index element={<Member members={creatorList} icons={icons} />} />
+        <Route element={<OtherSection />} >
+          <Route path={'/member'}>
+            <Route index element={<Member members={creatorList} icons={icons} />} />
+          </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    ) : (
+      <SPMainFrame works={data as IJsonData[]} imgs={imgs} icons={icons} creators={creatorList} />
+    )
   )
 }
 

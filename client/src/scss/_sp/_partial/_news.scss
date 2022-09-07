@@ -1,0 +1,15 @@
+.sp-wrap {
+  .news {
+    &__list {
+      margin: 0;
+      padding: 0;
+      padding-left: 16px;
+      list-style-type: none;
+    }
+
+    &__item {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+}
