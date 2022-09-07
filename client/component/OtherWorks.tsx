@@ -30,7 +30,7 @@ const OtherWorks: FC<IOtherWorksProps> = ({currentArticleId, list, creatorList})
         {
           randomList.map(item => {
             return (
-              <li className="other-works__item">
+              <li key={item.id} className="other-works__item">
                 <Link to={`/gallery/${item.id}`} className="other-works__link">
                   <h4 className="other-works__work-title">{item.title}</h4>
                 </Link>

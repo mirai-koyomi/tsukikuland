@@ -39,3 +39,6 @@ declare module '*/creator.json' {
   const value: IJsonCreator[];
   export = value;
 }
+
+declare module "*.jpg"
+declare module "*.png"

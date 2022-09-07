@@ -23,16 +23,16 @@ const WriterInfo: FC<IWriterInfoProps> = ({artist, icons}) => {
           <p className="writer-info__bio">{convertLineEndCode(artist.bio)}</p>
           <ul className="writer-info__sns">
             {
-              artist.twitter ? (
+              artist.twitter?.length ? (
                 <li className="writer-info__sns-item">
-                  <a href="/" className="writer-info__link">Twitter</a>
+                  <a href={`https://twitter.com/${artist.twitter}`} className="writer-info__link" target={'_blank'}>Twitter</a>
                 </li>
               ) : null
             }
             {
-              artist.pixiv ? (
+              artist.pixiv?.length ? (
                 <li className="writer-info__sns-item">
-                  <a href="/" className="writer-info__link">Pixiv</a>
+                  <a href={`https://www.pixiv.net/users/${artist.pixiv}`} className="writer-info__link" target={'_blank'}>Pixiv</a>
                 </li>
               ) : null
             }

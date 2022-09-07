@@ -1,14 +1,17 @@
 import React, { FC } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import MainFrame from './MainFrame'
+import { CookiesProvider } from 'react-cookie'
 
 const baseUrl = '/'
 
 const App: FC = () => {
   return (
-    <BrowserRouter basename={baseUrl}>
-      <MainFrame />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter basename={baseUrl}>
+        <MainFrame />
+      </BrowserRouter>
+    </CookiesProvider>
   )
 }
 
