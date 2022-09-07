@@ -16,7 +16,7 @@ const ArtSection: FC = () => {
   }, [setRelative])
 
   return (
-    <div className={`art-page${relative ? '' : ' --fixed'}`}>
+    <div className={`art-page`}>
       <Header isShow={show} />
 
       <div className="art-page__content">

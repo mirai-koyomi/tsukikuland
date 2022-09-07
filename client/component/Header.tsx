@@ -9,7 +9,9 @@ const Header: FC<IHeaderProps> = ({isShow = true}) => {
   return (
     <header className={`header${isShow ? '' : ' --hide'}`}>
       <h1 className="header-title">
-        月蔵食堂
+        <Link to={'/'} className="header-title__link">
+          月蔵食堂
+        </Link>
       </h1>
 
       <div className="header-description">

@@ -24,7 +24,7 @@ const LineView: FC<ILineViewProps> = ({item}) => {
           lineAry.map((line, idx) => {
             return (
               <p
-                className={`article__line ${idx === focusLine ? '--active' : ''}`}
+                className={`line-view__line ${idx === focusLine ? '--active' : ''}`}
                 ref={idx === focusLine ? targetLine : undefined}
                 key={idx}
               >{line}</p>
@@ -100,15 +100,17 @@ const LineView: FC<ILineViewProps> = ({item}) => {
   useKey(backLineKey, backLine)
 
   return (
-    <ScrollArea view={focusLine} total={lineAry.length} scrollTop={scrollTop}>
-      <div className="article__header">
-        <h1 className="article__title">{title}</h1>
-      </div>
+    <div className={`line-view${showFooter ? ' --show-footer' : ''}`} onWheel={handleWheel}>
+      <ScrollArea view={focusLine} total={lineAry.length} scrollTop={scrollTop}>
+        <div className="line-view__header">
+          <h1 className="line-view__title">{title}</h1>
+        </div>
 
-      <div className="article__body">
-        {eachLineWrap(lineAry)}
-      </div>
-    </ScrollArea>
+        <div className="line-view__body">
+          {eachLineWrap(lineAry)}
+        </div>
+      </ScrollArea>
+    </div>
   )
 }
 

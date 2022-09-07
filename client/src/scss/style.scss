@@ -63,6 +63,18 @@
   }
 }
 
+%title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 18px;
+}
+
+%text {
+  font-size: 18px;
+  color: #333;
+}
+
 body {
   // font-family: mplus, sans-serif;
   font-family: 'Shippori Mincho B1', serif;
@@ -109,12 +121,12 @@ body {
   &.--fixed {
     height: 100vh;
 
-    &__section {
+    .art-page__section {
       @include centerize($top: 0);
       height: 100%;
     }
 
-    &__fullview-section {
+    .art-page__fullview-section {
       @include centerize();
     }
   }
@@ -138,21 +150,32 @@ body {
   background-color: #e3e3e3;
   border-bottom: 1px solid #ddd;
   justify-content: space-between;
+  transition: 0.3s;
 
   &.--hide {
-    display: none;
+    opacity: 0.1;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &-title {
-    padding-right: 48px;
-    padding-bottom: 4px;
-    padding-left: 16px;
     font-size: 30px;
     font-weight: 400;
     line-height: 1;
     text-shadow: 1px 1px 1px #fff;
     border-left: 8px solid #666;
     display: inline-block;
+
+    &__link {
+      display: inline-block;
+      padding-right: 48px;
+      padding-bottom: 4px;
+      padding-left: 16px;
+      color: #333;
+      text-decoration: none;
+    }
   }
 
   &-description {
@@ -443,7 +466,35 @@ body {
   }
 }
 
-.article {
+.novel {
+  &__wrap {
+    min-height: 100vh;
+  }
+  &__view-switcher {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 80;
+  }
+}
+
+.static-view {
+  width: 18px * 28;
+  padding: calc(50vh - 20px / 2) 0 ;
+  margin: 0 auto;
+
+  &__title {
+    @extend %title;
+    line-height: 2.5;
+  }
+
+  &__text {
+    @extend %text;
+    line-height: 2.5;
+  }
+}
+
+.line-view {
   @include centerize;
   height: 100%;
   padding: 0;
@@ -455,8 +506,8 @@ body {
   }
 
   &__header {
-    width: 18px * 28;
     padding-bottom: 30px;
+    width: 18px * 28;
     margin: 0 auto;
   }
 
@@ -465,11 +516,16 @@ body {
     margin: 0 auto;
   }
 
+  &__title {
+    @extend %title;
+    line-height: 1;
+  }
+
   &__line {
+    @extend %text;
     position: relative;
     padding: 6px 0;
     min-height: (6px + 18px) * 2;
-    font-size: 18px;
     line-height: 2;
     opacity: 0.3;
     transition: 0.3s;
@@ -480,41 +536,6 @@ body {
       opacity: 1;
       transform: scale(100%);
     }
-  }
-
-  &__footer {
-    margin-top: 65px;
-    height: calc(100vh - 65px);
-    background: #e2e2e2;
-  }
-
-  &__writer-info,
-  &__other-works {
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.novel {
-  &__body {
-    width: 18px * 28;
-    padding: calc(50vh - 20px / 2) 0 ;
-    margin: 0 auto;
-    color: #333;
-  }
-
-  &__title {
-    font-size: 20px;
-    line-height: 2.5;
-    font-weight: 600;
-  }
-
-  &__text {
-    font-size: 18px;
-    line-height: 2.5;
-    margin-top: 18px;
   }
 }
 
@@ -530,6 +551,23 @@ body {
 
   .fullscreen {
     width: 100%;
+  }
+}
+
+
+.work-footer {
+  margin-top: 65px;
+  height: calc(100vh - 65px);
+  background: #e2e2e2;
+  position: relative;
+  z-index: 90;
+
+  &__writer-info,
+  &__other-works {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -659,5 +697,51 @@ body {
     background-color: #888;
     border-radius: 3px;
     min-height: 8px;
+  }
+}
+
+.view-switcher {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  opacity: 0.3;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__btn {
+    @include square(40px);
+    display: inline-block;
+    border: 1px solid #333;
+    border-right: none;
+    font-size: 20px;
+    line-height: 1;
+    padding: 9px 0;
+    text-align: center;
+    background-color: #ccc;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #d3d3d3;
+    }
+
+    &.--active {
+      background-color: #e3e3e3;
+    }
+
+    &:not(.--active) {
+      cursor: pointer;
+    }
+
+    &:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &:last-child {
+      border-radius: 0 10px 10px 0;
+      border-right: 1px solid #333;
+    }
   }
 }
