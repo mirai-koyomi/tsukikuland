@@ -26,7 +26,7 @@ const Top: FC = () => {
               <h3 className="main-info__description-title">News</h3>
               <ul className="main-info__news-list">
                 <li className="main-info__news-item">
-                  <time dateTime="2022-9-6">2022-09-06</time> - サイトオープン
+                  <time dateTime="2022-9-6">2022-09-09</time> - サイトオープン
                 </li>
               </ul>
             </div>
