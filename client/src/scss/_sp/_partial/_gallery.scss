@@ -15,7 +15,7 @@
     }
 
     &__nav {
-      @include centerize($top: auto, $left: auto, $bottom: 156px, $right: 16px);
+      @include centerize($top: auto, $left: auto, $bottom: 156px, $right: 16px, $position: fixed);
       height: 32px;
       z-index: 5;
     }
@@ -41,7 +41,7 @@
     }
 
     &__read-button {
-      @include centerize($left: auto, $top: auto, $right: 16px, $bottom: 16px);
+      @include centerize($left: auto, $top: auto, $right: 16px, $bottom: 16px, $position: fixed);
       @include square(88px);
       z-index: 5;
     }

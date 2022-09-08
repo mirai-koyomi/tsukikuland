@@ -1,5 +1,5 @@
-import { convertLineEndCode } from "./../../Util"
-import React, { FC, TouchEventHandler, UIEventHandler, useCallback, useEffect, useRef, useState, WheelEventHandler } from "react"
+import { convertLineEndCode, shuffle } from "./../../Util"
+import React, { FC, TouchEventHandler, useCallback, useEffect, useMemo, useRef, useState, WheelEventHandler } from "react"
 import {animated, useSprings, useTransition} from "react-spring"
 import ReadMoreButton from "../Component/ReadMoreButton"
 import Works from "../Component/Works"
@@ -17,12 +17,13 @@ interface IGalleryProps {
 
 const Gallery: FC<IGalleryProps> = ({works, creators, imgs}) => {
   const scrollArea = useRef<HTMLDivElement>(null)
+  const shuffleWorks = useMemo<IJsonData[]>(() => shuffle(works) as IJsonData[], [works])
   const [currentIdx, setCurrentIdx] = useState(8)
   const [lastTime, setLastTime]= useState(0)
   const [touchPos, setTouchPos] = useState(0)
-  const interval = 100
+  const interval = 500
 
-  const copyList = [...works, ...works, ...works]
+  const copyList = [...shuffleWorks, ...shuffleWorks, ...shuffleWorks]
 
   const scrollListTo = useCallback((
     idx: number,
@@ -73,7 +74,6 @@ const Gallery: FC<IGalleryProps> = ({works, creators, imgs}) => {
   })
 
   const handleTouchMove: TouchEventHandler = (e): void => {
-    e.preventDefault()
     e.touches[0].pageX > touchPos ? changeCurrentIdx(currentIdx + 1) : changeCurrentIdx(currentIdx - 1)
   }
 

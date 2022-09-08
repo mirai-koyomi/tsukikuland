@@ -1,5 +1,5 @@
-import { convertLineEndCode } from "./../Util"
-import React, { FC, useCallback, useEffect, useRef, useState, WheelEventHandler } from "react"
+import { convertLineEndCode, shuffle } from "./../Util"
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState, WheelEventHandler } from "react"
 import {animated, useSprings, useTransition} from "react-spring"
 import { Link } from "react-router-dom"
 
@@ -16,11 +16,12 @@ interface IGalleryListProps {
 
 const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
   const scrollArea = useRef<HTMLDivElement>(null)
+  const shuffleWorks = useMemo<IJsonData[]>(() => shuffle(list) as IJsonData[], [list])
   const [currentIdx, setCurrentIdx] = useState(8)
   const [lastTime, setLastTime]= useState(0)
   const interval = 250
 
-  const copyList = [...list, ...list, ...list]
+  const copyList = [...shuffleWorks, ...shuffleWorks, ...shuffleWorks]
 
   const scrollListTo = useCallback((
     idx: number,
@@ -123,9 +124,9 @@ const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
             const targetItem = copyList[idx]
             return (
               <animated.div className="gallery__bg" style={{backgroundImage: `url(${imgs[targetItem.id].thumb})`, ...styles}}>
-                <div className="gallery__info">
-                  <div className="gallery__front-area">
-                    <Link to={`${targetItem.id}`} className={'gallery__link'}>
+                <Link to={`${targetItem.id}`} className={'gallery__link'}>
+                  <div className="gallery__info">
+                    <div className="gallery__front-area">
                       <h1 className="gallery__title">
                         {convertLineEndCode(targetItem.title)}
                       </h1>
@@ -141,10 +142,10 @@ const GalleryList: FC<IGalleryListProps> = ({list, creatorList, imgs}) => {
                           })?.name}`
                         }
                       </p>
-                    </Link>
-                  </div>
+                    </div>
 
-                </div>
+                  </div>
+                </Link>
               </animated.div>
             )
           })

@@ -11,7 +11,7 @@ const WriterInfo: FC<IWriterInfoProps> = ({creator, icons}) => {
   return (
     <div className="writer-info">
       <h2 className="writer-info__title section__title">
-        Writer Infomation
+        Author Infomation
       </h2>
 
       <div className="writer-info__contents">
