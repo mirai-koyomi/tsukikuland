@@ -120,7 +120,7 @@ module.exports = (env, argv) => {
         'process.env': JSON.stringify(env)
       }),
       new HtmlWebpackPlugin({
-        template: "./client/src/html/index.html"
+        template: "./client/src/html/index.html",
       }),
     ],
   }

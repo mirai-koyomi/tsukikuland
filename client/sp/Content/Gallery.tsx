@@ -20,7 +20,7 @@ const Gallery: FC<IGalleryProps> = ({works, creators, imgs}) => {
   const [currentIdx, setCurrentIdx] = useState(8)
   const [lastTime, setLastTime]= useState(0)
   const [touchPos, setTouchPos] = useState(0)
-  const interval = 250
+  const interval = 100
 
   const copyList = [...works, ...works, ...works]
 
@@ -74,11 +74,11 @@ const Gallery: FC<IGalleryProps> = ({works, creators, imgs}) => {
 
   const handleTouchMove: TouchEventHandler = (e): void => {
     e.preventDefault()
-    e.touches[0].pageY < touchPos ? changeCurrentIdx(currentIdx + 1) : changeCurrentIdx(currentIdx - 1)
+    e.touches[0].pageX > touchPos ? changeCurrentIdx(currentIdx + 1) : changeCurrentIdx(currentIdx - 1)
   }
 
   const handleTouchStart: TouchEventHandler = (e): void => {
-    setTouchPos(e.touches[0].pageY)
+    setTouchPos(e.touches[0].pageX)
   }
 
   const changeCurrentIdx = (nextIdx: number) => {
